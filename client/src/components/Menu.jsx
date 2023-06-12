@@ -123,6 +123,29 @@ const TopMenu = (props) => {
             showClearModal();
         } else if (e.key === '4') {
             showReloadModal();
+        } else if (e.key === '5') {
+            /**
+             * @method: print the radar content
+            */
+            // function doPrint() {
+            let head_str = "<html><head><title></title></head><body>";
+            let foot_str = "</body></html>";
+            let older = document.body.innerHTML;
+            let new_str_list = [];
+            let idx = 0;
+            props.entries.forEach((element) => {
+                idx++;
+                new_str_list.push(
+                    `<h1>${idx + "." + element.label}</h1> \n ${element.desc ? element.desc : ""
+                    } \n`
+                );
+            });
+
+            let new_str = new_str_list.join("");
+            document.body.innerHTML = head_str + new_str + foot_str;
+            window.print();
+            document.body.innerHTML = older;
+            window.location.reload();
         } else if (e.key === '6') {
             // const printBtn = document.querySelector(".print");
             const body = document.body;
