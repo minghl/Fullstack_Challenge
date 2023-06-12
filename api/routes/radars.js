@@ -10,7 +10,7 @@ const router = express.Router();
 router.get("/", getRadars);
 // router.get("/:id", getPost);
 router.post("/", addRadar);
-router.delete("/:id", deleteRadars);
+router.delete("/", deleteRadars);
 // router.put("/:id", updatePost);
 
 export default router;

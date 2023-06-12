@@ -26,18 +26,31 @@ const items = [
 ];
 
 
-
 const TopMenu = (props) => {
     const [current, setCurrent] = useState('mail');
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isClearOpen, setIsClearOpen] = useState(false);
     const [type, setType] = useState('');
     const [importance, setImportance] = useState('');
     const [name, setName] = useState('');
 
+    const showClearModal = () => {
+        setIsClearOpen(true);
+    };
     const showModal = () => {
         setIsModalOpen(true);
     };
 
+    const handleOKClear = () => {
+        const deleteRadars = async () => {
+            try {
+                await newRequest.delete(`/radars`);
+            } catch (err) { }
+        };
+        deleteRadars();
+        window.location.reload();
+        setIsClearOpen(false);
+    }
 
 
     const handleOk = () => {
@@ -60,9 +73,15 @@ const TopMenu = (props) => {
         setIsModalOpen(false);
     };
 
+    const handleCancelClear = () => {
+        setIsClearOpen(false);
+    }
+
     const handleCancel = () => {
         setIsModalOpen(false);
     };
+
+
 
     const onClick = (e) => {
         console.log('click ', e);
@@ -70,6 +89,8 @@ const TopMenu = (props) => {
         if (e.key === '1') {
             console.log(123123);
             showModal();
+        } else if (e.key === '3') {
+            showClearModal();
         }
     };
 
@@ -92,6 +113,9 @@ const TopMenu = (props) => {
     const { Option } = Select;
     return <>
         <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
+        <Modal title="Reset Tech Radar!" open={isClearOpen} onOk={handleOKClear} onCancel={handleCancelClear} okText={'Reset'}>
+            Pay attention to this operation! You will delete all the data!
+        </Modal>
         <Modal title="Add New Technology" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
             <Form>
                 <Form.Item label="Technology Name">
