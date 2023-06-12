@@ -1,4 +1,4 @@
-import { CloudDownloadOutlined, PlusOutlined, SaveOutlined, DeleteOutlined } from '@ant-design/icons';
+import { CloudDownloadOutlined, PlusOutlined, SaveOutlined, DeleteOutlined, PrinterOutlined, AlertOutlined } from '@ant-design/icons';
 import { Menu, Form, Modal, Input, Select } from 'antd';
 import { useState } from 'react';
 import newRequest from "../utils/newRequest.js";
@@ -23,6 +23,16 @@ const items = [
         key: '4',
         icon: <CloudDownloadOutlined />
     },
+    {
+        label: 'Print Tech Details',
+        key: '5',
+        icon: <PrinterOutlined />,
+    },
+    {
+        label: 'Change Background Mode',
+        key: '6',
+        icon: <AlertOutlined />,
+    },
 ];
 
 
@@ -34,6 +44,7 @@ const TopMenu = (props) => {
     const [type, setType] = useState('');
     const [importance, setImportance] = useState('');
     const [name, setName] = useState('');
+    const [color, setColor] = useState(true);
 
     const showClearModal = () => {
         setIsClearOpen(true);
@@ -112,6 +123,23 @@ const TopMenu = (props) => {
             showClearModal();
         } else if (e.key === '4') {
             showReloadModal();
+        } else if (e.key === '6') {
+            // const printBtn = document.querySelector(".print");
+            const body = document.body;
+            const radar = document.querySelector("#radar");
+            const menu = document.querySelector(".ant-menu");
+            // click the button to toggle background
+            if (color) {
+                body.style.backgroundColor = "rgb(57 82 80)";
+                radar.style.backgroundColor = "rgb(57 82 80)";
+                menu.style.backgroundColor = "rgb(57 82 80)";
+                setColor(false);
+            } else {
+                body.style.backgroundColor = "#fff";
+                radar.style.backgroundColor = "#fff";
+                menu.style.backgroundColor = "#fff";
+                setColor(true);
+            }
         }
     };
 
