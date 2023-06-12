@@ -38,6 +38,8 @@ const TopMenu = (props) => {
         setIsModalOpen(true);
     };
 
+
+
     const handleOk = () => {
         const addRadar = async () => {
             try {
@@ -54,7 +56,7 @@ const TopMenu = (props) => {
             } catch (err) { }
         };
         addRadar();
-
+        window.location.reload();
         setIsModalOpen(false);
     };
 
@@ -104,7 +106,7 @@ const TopMenu = (props) => {
                         <Option value="1">Infrastructure</Option>
                         <Option value="2">Datastores</Option>
                         <Option value="3">Data Management</Option>
-                        <Option value="4">Languages</Option>
+                        <Option value="0">Languages</Option>
                     </Select>
                 </Form.Item>
                 <Form.Item label="Technology Importance">
