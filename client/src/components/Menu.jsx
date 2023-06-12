@@ -19,7 +19,7 @@ const items = [
         icon: <DeleteOutlined />,
     },
     {
-        label: 'Load Tech Radar From Database',
+        label: 'Restore Data From Database',
         key: '4',
         icon: <CloudDownloadOutlined />
     },
@@ -30,6 +30,7 @@ const TopMenu = (props) => {
     const [current, setCurrent] = useState('mail');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isClearOpen, setIsClearOpen] = useState(false);
+    const [isReloadOpen, setIsReloadOpen] = useState(false);
     const [type, setType] = useState('');
     const [importance, setImportance] = useState('');
     const [name, setName] = useState('');
@@ -40,6 +41,10 @@ const TopMenu = (props) => {
     const showModal = () => {
         setIsModalOpen(true);
     };
+
+    const showReloadModal = () => {
+        setIsReloadOpen(true);
+    }
 
     const handleOKClear = () => {
         const deleteRadars = async () => {
@@ -52,6 +57,16 @@ const TopMenu = (props) => {
         setIsClearOpen(false);
     }
 
+    const handleOKRestore = () => {
+        const reloadRadar = async () => {
+            try {
+                await newRequest.get(`/radars/reload`);
+            } catch (err) { }
+        };
+        reloadRadar();
+        window.location.reload();
+        setIsReloadOpen(false);
+    };
 
     const handleOk = () => {
         const addRadar = async () => {
@@ -77,6 +92,10 @@ const TopMenu = (props) => {
         setIsClearOpen(false);
     }
 
+    const handleCancelRestore = () => {
+        setIsReloadOpen(false);
+    }
+
     const handleCancel = () => {
         setIsModalOpen(false);
     };
@@ -91,6 +110,8 @@ const TopMenu = (props) => {
             showModal();
         } else if (e.key === '3') {
             showClearModal();
+        } else if (e.key === '4') {
+            showReloadModal();
         }
     };
 
@@ -114,6 +135,9 @@ const TopMenu = (props) => {
     return <>
         <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
         <Modal title="Reset Tech Radar!" open={isClearOpen} onOk={handleOKClear} onCancel={handleCancelClear} okText={'Reset'}>
+            Pay attention to this operation! You will delete all the data!
+        </Modal>
+        <Modal title="Restore Data From DB" open={isReloadOpen} onOk={handleOKRestore} onCancel={handleCancelRestore} okText={'Reset'}>
             Pay attention to this operation! You will delete all the data!
         </Modal>
         <Modal title="Add New Technology" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
