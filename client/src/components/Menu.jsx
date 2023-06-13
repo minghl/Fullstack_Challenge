@@ -1,4 +1,4 @@
-import { CloudDownloadOutlined, PlusOutlined, SaveOutlined, DeleteOutlined, PrinterOutlined, AlertOutlined } from '@ant-design/icons';
+import { CloudDownloadOutlined, PlusOutlined, SaveOutlined, DeleteOutlined, PrinterOutlined, AlertOutlined, UploadOutlined } from '@ant-design/icons';
 import { Menu, Form, Modal, Input, Select } from 'antd';
 import { useState } from 'react';
 import newRequest from "../utils/newRequest.js";
@@ -33,6 +33,7 @@ const items = [
         key: '6',
         icon: <AlertOutlined />,
     },
+
 ];
 
 

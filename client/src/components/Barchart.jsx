@@ -2,6 +2,7 @@ import * as d3 from "d3";
 import newRequest from "../utils/newRequest.js";
 import { useEffect, useRef, useState } from "react";
 import TopMenu from './Menu.jsx';
+import CsvUpload from "./Upload.jsx";
 
 const Barchart = () => {
     const [entries, setEntries] = useState(
@@ -1082,6 +1083,7 @@ const Barchart = () => {
 
     return <>
         <TopMenu entries={entries} />
+        <CsvUpload entries={entries} />
         <svg id="radar"
             ref={ref}
         >

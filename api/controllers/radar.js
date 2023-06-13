@@ -63,4 +63,20 @@ export const reloadRadars = (req, res) => {
   });
 };
 
+export const batchRadars = (req, res) => {
+  const q2 =
+    "INSERT INTO Radar(`quadrant`, `ring`, `label`, `active`, `moved`,`desc`,`id`,`link`) VALUES ?";
+  console.log(req.body.data, 'req');
+  const data = req.body.data;
+
+  console.log(data);
+
+
+  db.query(q2, [data], (err, data) => {
+    if (err) return res.status(500).json(err);
+    return res.json("Post has been created.");
+  });
+  // return res.json(req.body);
+};
+
 
